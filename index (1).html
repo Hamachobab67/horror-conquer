@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171923">
+<title>쫄보 독사의 공겜 정복기</title>
+<style>
+:root{--bg:#11131b;--panel:#1b1e2a;--panel2:#242838;--text:#f5f6fb;--muted:#a8aec2;--line:#34394c;--accent:#b9a4ff;--accent2:#ffcf8a;--good:#9de2c0;--danger:#ff9baf;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#29223d 0,transparent 34%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 14px;background:var(--accent);color:#191526;font-weight:750}button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}button.danger{background:#4a2732;color:#ffdce3;border:1px solid #774050}button:disabled{opacity:.45;cursor:not-allowed}
+a{color:var(--accent)}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.topbar{border-bottom:1px solid var(--line);background:#11131bd9;backdrop-filter:blur(12px);position:sticky;top:0;z-index:5}.nav{height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;letter-spacing:-.04em}.brand span{color:var(--accent)}.nav-actions{display:flex;gap:8px;align-items:center}
+.hero{padding:46px 0 28px}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent2);font-weight:800}.hero h1{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.055em;line-height:1.12;margin:10px 0 14px;max-width:780px}.hero p{max-width:700px;color:var(--muted);margin:0;font-size:1.02rem}.hero strong{color:var(--text)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.stat{padding:10px 14px;background:#ffffff08;border:1px solid var(--line);border-radius:14px;color:var(--muted);font-size:.9rem}.stat b{color:var(--text);margin-right:4px}
+.toolbar{display:grid;grid-template-columns:minmax(220px,1fr) 220px 220px;gap:10px;margin:16px 0 18px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.85rem;color:var(--muted);font-weight:650}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:11px 12px;border-radius:12px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 12px}.section-head h2{margin:0;font-size:1.25rem;letter-spacing:-.025em}.section-head p{margin:3px 0 0;color:var(--muted);font-size:.9rem}.count{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-bottom:48px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-3px);border-color:#71649b}.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#292d40,#151722);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#9299b3}.thumb img{width:100%;height:100%;object-fit:cover}.thumb .placeholder{font-size:2rem}.pill{position:absolute;left:10px;top:10px;background:#11131be8;border:1px solid #ffffff20;border-radius:999px;padding:4px 8px;font-size:.72rem;color:#fff}.card-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1}.card-title{font-size:1.04rem;line-height:1.35;font-weight:800;letter-spacing:-.025em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.meta{font-size:.8rem;color:var(--muted)}.ratings{display:flex;gap:6px;flex-wrap:wrap}.rating{font-size:.76rem;background:#ffffff08;border:1px solid var(--line);padding:5px 7px;border-radius:8px;color:#d8dbee}.rating b{color:var(--accent2)}.note{font-size:.88rem;color:#c4c9d9;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}.card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto}.score{font-size:.8rem;color:var(--muted)}.score b{font-size:1rem;color:var(--accent2)}.empty{grid-column:1/-1;padding:42px 20px;border:1px dashed var(--line);border-radius:var(--radius);text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--text);font-size:1.05rem;margin-bottom:6px}
+footer{border-top:1px solid var(--line);padding:24px 0 36px;color:var(--muted);font-size:.83rem}
+.overlay{position:fixed;inset:0;background:#080910d9;z-index:20;display:none;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto}.overlay.show{display:flex}.dialog{width:min(760px,100%);background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 24px 90px #0008}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}.dialog-head h2{font-size:1.1rem;margin:0}.dialog-content{padding:20px}.detail-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--panel2);border-radius:14px}.detail-title{font-size:1.5rem;letter-spacing:-.04em;line-height:1.2;margin:16px 0 8px}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}.detail-item{padding:12px;border:1px solid var(--line);border-radius:12px;background:#ffffff04}.detail-item span{display:block;color:var(--muted);font-size:.78rem;margin-bottom:3px}.detail-item b{font-size:1rem}.detail-copy{white-space:pre-wrap;color:#d8dbea}.dialog-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.admin-panel{display:none;margin:20px 0 42px;border:1px solid #66558e;background:#201c31;border-radius:20px;padding:18px}.admin-panel.show{display:block}.admin-panel h2{margin:0 0 4px}.admin-warning{background:#493a24;border:1px solid #80683d;color:#ffe7b7;border-radius:12px;padding:12px;font-size:.86rem;margin:12px 0 18px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.form-grid .full{grid-column:1/-1}.rating-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.tiny{font-size:.78rem;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field:first-child{grid-column:1/-1}.rating-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.wrap{width:min(100% - 22px,1180px)}.nav{height:58px}.brand{font-size:.91rem}.nav-actions button{padding:8px 10px;font-size:.82rem}.hero{padding:32px 0 18px}.grid{grid-template-columns:1fr;gap:12px}.toolbar{grid-template-columns:1fr 1fr}.toolbar .field:first-child{grid-column:1/-1}.card{display:grid;grid-template-columns:42% 1fr}.thumb{height:100%;aspect-ratio:auto;min-height:175px}.card-body{padding:12px;gap:8px}.card-title{font-size:.94rem}.ratings .rating{font-size:.68rem;padding:4px 5px}.note{font-size:.8rem;min-height:0}.detail-grid{grid-template-columns:1fr 1fr}.form-grid,.rating-fields{grid-template-columns:1fr}.form-grid .full{grid-column:auto}.dialog-content{padding:14px}.detail-title{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap nav">
+  <div class="brand">쫄보 독사의 <span>공겜 정복기</span></div>
+  <div class="nav-actions"><button class="secondary" id="adminToggle">관리자 도구</button></div>
+</div></header>
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">HORROR GAME GUIDE · UJOOHAMA VIDEO ARCHIVE</div>
+    <h1>무서워도 보고 싶은 마음,<br><span style="color:var(--accent)">나에게 맞는 공겜부터.</span></h1>
+    <p>공포게임이 무서워 망설이는 독사님들을 위한 영상 기록장. 공포 요소와 스토리를 미리 살펴보고, 내 공포 내성에 맞는 영상부터 도전해 보세요.</p>
+    <div class="stats">
+      <div class="stat"><b id="videoCount">0</b>개 영상</div>
+      <div class="stat"><b>0.5점</b> 단위 평가</div>
+      <div class="stat">영상은 <b>유튜브 원본</b>에서 시청</div>
+    </div>
+  </section>
+
+  <section id="adminPanel" class="admin-panel">
+    <h2>관리자 도구 <span style="color:var(--accent);font-size:.8rem">초기 시제품</span></h2>
+    <p class="tiny">이 화면은 기능을 시험하기 위한 시제품이야. 현재 저장 내용은 이 브라우저에만 저장돼.</p>
+    <div class="admin-warning"><strong>중요:</strong> GitHub Pages에는 안전한 비밀번호 보호나 공용 데이터베이스가 포함되어 있지 않아. 이 시제품의 관리자 도구는 실제 보안 기능이 아니며, 여기서 추가한 내용은 다른 방문자에게 공유되지 않아. 공개 사이트에 정식 적용하기 전에는 인증과 공용 저장소를 별도로 연결해야 해.</div>
+    <form id="videoForm">
+      <input type="hidden" id="editId">
+      <div class="form-grid">
+        <div class="field full"><label for="videoUrl">유튜브 영상 링크 *</label><input id="videoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." required></div>
+        <div class="field full"><label for="videoTitle">영상 제목 *</label><input id="videoTitle" placeholder="유튜브에서 자동 조회 · 필요하면 수정 가능" required><div class="tiny" id="apiStatus">유튜브 링크 입력 후 영상 정보를 자동 조회할 수 있어. API 키가 없으면 직접 입력해 줘.</div></div>
+        <div class="field"><label for="videoDate">업로드 날짜</label><input id="videoDate" type="date"></div>
+        <div class="field"><label for="videoDuration">영상 길이</label><input id="videoDuration" placeholder="예: 32:18"></div>
+        <div class="field full"><label for="videoGameName">게임 이름</label><input id="videoGameName" placeholder="예: 파피 플레이타임 챕터 3"></div>
+        <div class="field full"><label for="livestreamUrl">생방송 링크</label><input id="livestreamUrl" type="url" placeholder="해당 게임을 플레이한 생방송 링크 (선택)"></div>
+        <div class="field full"><label for="videoSpecial">특이사항</label><textarea id="videoSpecial" rows="2" placeholder="예: 퍼즐 비중이 큼, 특정 장면 주의 등"></textarea></div>
+        <div class="field full"><label for="videoDescription">영상 설명 (선택)</label><textarea id="videoDescription" rows="3" placeholder="유튜브 설명 자동 조회 · 필요하면 수정 가능"></textarea></div>
+      </div>
+      <h3 style="font-size:1rem;margin:20px 0 10px">항목별 평가 (0~5점, 0.5점 단위)</h3>
+      <div class="rating-fields">
+        <div class="field"><label for="story">스토리 (높을수록 좋음)</label><select id="story"></select></div>
+        <div class="field"><label for="gore">신체 훼손 묘사 (높을수록 강함)</label><select id="gore"></select></div>
+        <div class="field"><label for="jumpscare">점프 스케어 빈도 (높을수록 잦음)</label><select id="jumpscare"></select></div>
+        <div class="field"><label for="ghost">괴물·귀신 외형 공포도 (높을수록 무서움)</label><select id="ghost"></select></div>
+        <div class="field"><label for="psych">심리적 긴장·불안 (높을수록 강함)</label><select id="psych"></select></div>
+        <div class="field"><label for="chase">추격·도주 압박감 (높을수록 강함)</label><select id="chase"></select></div>
+      </div>
+      <div class="form-actions"><button type="submit" id="saveVideo">영상 저장</button><button type="button" class="secondary" id="resetForm">입력 초기화</button><button type="button" class="secondary" id="exportData">데이터 백업 내보내기</button><label class="secondary" style="display:inline-flex;align-items:center;padding:10px 14px;border-radius:12px;cursor:pointer">백업 가져오기<input id="importData" type="file" accept="application/json" class="hidden"></label></div>
+      <div class="field full" style="margin-top:14px"><label for="youtubeApiKey">YouTube Data API 키 (선택)</label><input id="youtubeApiKey" type="password" autocomplete="off" placeholder="Google Cloud에서 발급한 API 키"><div class="tiny">키는 이 브라우저에만 저장돼. 공식 API를 사용하려면 Google Cloud에서 YouTube Data API v3를 활성화하고 API 키를 발급받아야 해. 키를 HTML 파일에 직접 적어 GitHub에 올리지는 마.</div></div>
+      <p class="tiny">유튜브 링크를 입력하면 썸네일이 자동 표시돼. API 키를 설정하면 제목·영상 길이·업로드 날짜·설명을 조회할 수 있어. 자동 조회가 실패해도 모든 항목은 직접 입력하거나 수정할 수 있어.</p>
+    </form>
+    <div style="margin-top:20px"><h3 style="font-size:1rem;margin-bottom:8px">등록한 영상 관리</h3><div id="adminList" class="tiny">등록한 영상이 여기에 표시돼.</div></div>
+  </section>
+
+  <section>
+    <div class="section-head"><div><h2>영상 둘러보기</h2><p>공포 요소를 미리 확인하고, 나에게 맞는 영상부터 찾아봐.</p></div><div class="count" id="resultCount">0개</div></div>
+    <div class="toolbar">
+      <div class="field"><label for="search">영상 검색</label><input id="search" placeholder="제목, 소개, 특이사항 검색"></div>
+      <div class="field"><label for="sort">정렬 기준</label><select id="sort"><option value="newest">최신순</option><option value="oldest">오래된 순</option><option value="story-desc">스토리 높은 순</option><option value="story-asc">스토리 낮은 순</option><option value="gore-asc">신체 훼손 묘사 낮은 순</option><option value="gore-desc">신체 훼손 묘사 높은 순</option><option value="jump-asc">점프 스케어 적은 순</option><option value="jump-desc">점프 스케어 많은 순</option><option value="ghost-asc">괴물·귀신 외형 공포도 낮은 순</option><option value="ghost-desc">괴물·귀신 외형 공포도 높은 순</option><option value="psych-asc">심리적 긴장·불안 낮은 순</option><option value="psych-desc">심리적 긴장·불안 높은 순</option><option value="chase-asc">추격·도주 압박감 낮은 순</option><option value="chase-desc">추격·도주 압박감 높은 순</option></select></div>
+      <div class="field"><label for="filter">공포 요소 필터</label><select id="filter"><option value="all">전체 영상</option><option value="starter">입문 후보 (신체 훼손·점프 스케어 낮음)</option><option value="low-gore">신체 훼손 묘사 2점 이하</option><option value="low-ghost">괴물·귀신 외형 공포도 2점 이하</option><option value="low-chase">추격·도주 압박감 2점 이하</option><option value="low-jump">점프 스케어 2점 이하</option><option value="low-psych">심리적 긴장·불안 2점 이하</option></select></div>
+    </div>
+    <div class="grid" id="videoGrid"></div>
+  </section>
+</main>
+<footer><div class="wrap">팬이 직접 기록하는 비공식 영상 가이드입니다. 영상의 저작권은 원 권리자에게 있으며, 영상 재생은 유튜브 원본 페이지에서 이루어집니다.</div></footer>
+
+<div class="overlay" id="detailOverlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="dialog"><div class="dialog-head"><h2>영상 상세 정보</h2><button class="secondary" id="closeDetail" aria-label="닫기">닫기 ✕</button></div><div class="dialog-content" id="detailContent"></div></div>
+</div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const STORAGE_KEY = 'jolbo-doksa-horror-catalog-v1';
+  const ratingKeys = ['story','gore','jumpscare','ghost','psych','chase'];
+  const ratingNames = {story:'스토리',gore:'신체 훼손 묘사',jumpscare:'점프 스케어 빈도',ghost:'괴물·귀신 외형 공포도',psych:'심리적 긴장·불안',chase:'추격·도주 압박감'};
+  let videos = loadVideos();
+  let activeVideoId = null;
+
+  function loadVideos(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(x)?x.map(v=>({...v,gameName:v.gameName??v.summary??'',livestreamUrl:v.livestreamUrl??'',chase:v.chase??''})):[]}catch{return []}}
+  function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(videos))}
+  function escapeHtml(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function idFromUrl(raw){
+    try{
+      const u=new URL(raw);
+      if(u.hostname==='youtu.be'||u.hostname.endsWith('.youtu.be')) return u.pathname.split('/').filter(Boolean)[0]||'';
+      if(u.hostname.includes('youtube.com')){
+        if(u.pathname==='/watch') return u.searchParams.get('v')||'';
+        const parts=u.pathname.split('/').filter(Boolean);
+        if(['embed','shorts','live'].includes(parts[0])) return parts[1]||'';
+      }
+    }catch{}
+    return '';
+  }
+  function thumbUrl(v){const id=idFromUrl(v.url||'');return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:''}
+  function ratingOptions(){
+    const opts='<option value="">미평가</option>'+Array.from({length:11},(_,i)=>`<option value="${i/2}">${(i/2).toFixed(1)}점</option>`).join('');
+    ratingKeys.forEach(k=>$(k).innerHTML=opts);
+  }
+  function dateValue(v){return v.date?new Date(v.date+'T00:00:00').getTime():0}
+  function sortVideos(arr){
+    const s=$('sort').value;
+    return arr.sort((a,b)=>{
+      if(s==='newest')return dateValue(b)-dateValue(a);
+      if(s==='oldest')return dateValue(a)-dateValue(b);
+      const map={'story-desc':['story',-1],'story-asc':['story',1],'gore-asc':['gore',1],'gore-desc':['gore',-1],'jump-asc':['jumpscare',1],'jump-desc':['jumpscare',-1],'ghost-asc':['ghost',1],'ghost-desc':['ghost',-1],'psych-asc':['psych',1],'psych-desc':['psych',-1],'chase-asc':['chase',1],'chase-desc':['chase',-1]};
+      const [k,d]=map[s]||['story',-1];
+      const av=a[k]===''||a[k]==null?-1:Number(a[k]), bv=b[k]===''||b[k]==null?-1:Number(b[k]);
+      if(av===-1&&bv!==-1)return 1;if(bv===-1&&av!==-1)return -1;return (av-bv)*d;
+    });
+  }
+  function filterVideos(arr){
+    const f=$('filter').value;
+    if(f==='starter')return arr.filter(v=>Number(v.gore)<=2&&Number(v.jumpscare)<=2);
+    if(f==='low-gore')return arr.filter(v=>v.gore!==''&&v.gore!=null&&Number(v.gore)<=2);
+    if(f==='low-ghost')return arr.filter(v=>v.ghost!==''&&v.ghost!=null&&Number(v.ghost)<=2);
+    if(f==='low-chase')return arr.filter(v=>v.chase!==''&&v.chase!=null&&Number(v.chase)<=2);
+    if(f==='low-jump')return arr.filter(v=>v.jumpscare!==''&&Number(v.jumpscare)<=2);
+    if(f==='low-psych')return arr.filter(v=>v.psych!==''&&Number(v.psych)<=2);
+    return arr;
+  }
+  function ratingChips(v){
+    return ratingKeys.filter(k=>v[k]!==''&&v[k]!=null).map(k=>`<span class="rating">${ratingNames[k]} <b>${Number(v[k]).toFixed(1)}</b></span>`).join('');
+  }
+  function render(){
+    const q=$('search').value.trim().toLowerCase();
+    let arr=videos.filter(v=>[v.title,v.gameName,v.summary,v.special,v.description].join(' ').toLowerCase().includes(q));
+    arr=sortVideos(filterVideos(arr));
+    $('videoCount').textContent=videos.length;
+    $('resultCount').textContent=`${arr.length}개`;
+    $('videoGrid').innerHTML=arr.length?arr.map(v=>{
+      const thumb=thumbUrl(v);
+      return `<article class="card"><div class="thumb">${thumb?`<img src="${thumb}" alt="" loading="lazy" onerror="this.style.display='none'">`:'<span class="placeholder">☾</span>'}<span class="pill">${v.duration?escapeHtml(v.duration):'공포게임 기록'}</span></div><div class="card-body"><div class="card-title">${escapeHtml(v.title)}</div><div class="meta">${v.date?escapeHtml(v.date):'업로드 날짜 미기록'}${v.duration?' · '+escapeHtml(v.duration):''}</div><div class="ratings">${ratingChips(v)||'<span class="rating">아직 평가 전</span>'}</div><div class="note">${escapeHtml(v.gameName||v.summary||v.special||'게임 이름을 아직 기록하지 않았어.')}</div><div class="card-foot"><span class="score">${v.gameName?'게임 정보 등록됨':'게임 정보 미등록'}</span><button class="secondary" data-detail="${escapeHtml(v.id)}">자세히 보기</button></div></div></article>`;
+    }).join(''):`<div class="empty"><strong>${videos.length?'조건에 맞는 영상이 없어.':'아직 등록된 영상이 없어!'}</strong>${videos.length?'검색어나 필터를 바꿔 봐.':'관리자 도구에서 유튜브 영상을 추가하면 여기에 나타나.'}</div>`;
+    renderAdminList();
+  }
+  function renderAdminList(){
+    if(!videos.length){$('adminList').textContent='등록한 영상이 여기에 표시돼.';return}
+    $('adminList').innerHTML=videos.map(v=>`<div style="display:flex;gap:8px;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow-wrap:anywhere">${escapeHtml(v.title)}</span><span style="display:flex;gap:6px;flex-shrink:0"><button class="secondary" data-edit="${escapeHtml(v.id)}">수정</button><button class="danger" data-delete="${escapeHtml(v.id)}">삭제</button></span></div>`).join('');
+  }
+  function openDetail(id){
+    const v=videos.find(x=>x.id===id);if(!v)return;activeVideoId=id;
+    const thumb=thumbUrl(v);
+    $('detailContent').innerHTML=`${thumb?`<img class="detail-thumb" src="${thumb}" alt="영상 썸네일">`:'<div class="detail-thumb"></div>'}<h3 class="detail-title" id="detailTitle">${escapeHtml(v.title)}</h3><div class="meta">${v.date?`업로드 ${escapeHtml(v.date)}`:'업로드 날짜 미기록'}${v.duration?' · '+escapeHtml(v.duration):''}</div><h4>게임 이름</h4><div class="detail-copy">${escapeHtml(v.gameName||v.summary||'아직 게임 이름을 기록하지 않았어.')}</div><div class="detail-grid">${ratingKeys.map(k=>`<div class="detail-item"><span>${ratingNames[k]}${k==='story'?' · 높을수록 좋음':' · 높을수록 강함'}</span><b>${v[k]!==''&&v[k]!=null?Number(v[k]).toFixed(1)+' / 5':'미평가'}</b></div>`).join('')}</div><h4>특이사항</h4><div class="detail-copy">${escapeHtml(v.special||'기록된 특이사항이 없어.')}</div>${v.description?`<h4>영상 설명</h4><div class="detail-copy">${escapeHtml(v.description)}</div>`:''}<div class="dialog-actions"><button id="watchVideo">유튜브에서 영상 보기 ↗</button>${v.livestreamUrl?'<button class="secondary" id="livestreamLink">생방송 바로가기 ↗</button>':''}</div>`;
+    $('detailOverlay').classList.add('show');
+    $('watchVideo').onclick=()=>{if(v.url)window.open(v.url,'_blank','noopener,noreferrer')};
+    if(v.livestreamUrl){$('livestreamLink').onclick=()=>window.open(v.livestreamUrl,'_blank','noopener,noreferrer')}
+  }
+  function closeDetail(){$('detailOverlay').classList.remove('show');activeVideoId=null}
+  function resetForm(){$('videoForm').reset();$('editId').value='';$('saveVideo').textContent='영상 저장';ratingKeys.forEach(k=>$(k).value='');$('youtubeApiKey').value=localStorage.getItem(API_KEY_STORAGE)||'';$('apiStatus').textContent='유튜브 링크 입력 후 영상 정보를 자동 조회할 수 있어. API 키가 없으면 직접 입력해 줘.'}
+  function fillForm(v){
+    $('editId').value=v.id;$('videoUrl').value=v.url||'';$('videoTitle').value=v.title||'';$('videoDate').value=v.date||'';$('videoDuration').value=v.duration||'';$('videoGameName').value=v.gameName??v.summary??'';$('livestreamUrl').value=v.livestreamUrl||'';$('videoSpecial').value=v.special||'';$('videoDescription').value=v.description||'';
+    ratingKeys.forEach(k=>$(k).value=v[k]??'');$('saveVideo').textContent='수정 내용 저장';$('adminPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  const API_KEY_STORAGE='jolbo-youtube-data-api-key-v1';
+  $('youtubeApiKey').value=localStorage.getItem(API_KEY_STORAGE)||'';
+  $('youtubeApiKey').addEventListener('change',()=>{const key=$('youtubeApiKey').value.trim();if(key)localStorage.setItem(API_KEY_STORAGE,key);else localStorage.removeItem(API_KEY_STORAGE)});
+  function formatDuration(iso){const m=String(iso||'').match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);if(!m)return '';const h=Number(m[1]||0),min=Number(m[2]||0),sec=Number(m[3]||0);return h?`${h}:${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${min}:${String(sec).padStart(2,'0')}`}
+  let metadataTimer=null;
+  $('videoUrl').addEventListener('input',()=>{
+    const id=idFromUrl($('videoUrl').value.trim());
+    if(!id){$('apiStatus').textContent='유튜브 영상 링크를 확인해 줘.';return}
+    clearTimeout(metadataTimer);
+    $('apiStatus').textContent='썸네일 링크를 확인했어. API 키가 있으면 영상 정보를 조회할게.';
+    metadataTimer=setTimeout(()=>fetchYoutubeMetadata(id),650);
+  });
+  async function fetchYoutubeMetadata(videoId){
+    const key=$('youtubeApiKey').value.trim()||localStorage.getItem(API_KEY_STORAGE)||'';
+    if(!key){$('apiStatus').textContent='썸네일은 자동 표시돼. 제목·길이·날짜 자동 조회를 쓰려면 YouTube Data API 키를 입력해 줘.';return}
+    $('apiStatus').textContent='유튜브 영상 정보를 조회하는 중…';
+    try{
+      const endpoint=`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${encodeURIComponent(videoId)}&key=${encodeURIComponent(key)}`;
+      const res=await fetch(endpoint);const data=await res.json();
+      if(!res.ok)throw new Error(data?.error?.message||'API 요청에 실패했어.');
+      const item=data.items?.[0];if(!item)throw new Error('영상 정보를 찾을 수 없어. 비공개·삭제·제한된 영상일 수 있어.');
+      const sn=item.snippet||{};
+      if(!$('videoTitle').value.trim()||$('videoTitle').dataset.autofilled==='true'){$('videoTitle').value=sn.title||'';$('videoTitle').dataset.autofilled='true'}
+      if(!$('videoDate').value||$('videoDate').dataset.autofilled==='true'){$('videoDate').value=(sn.publishedAt||'').slice(0,10);$('videoDate').dataset.autofilled='true'}
+      if(!$('videoDuration').value.trim()||$('videoDuration').dataset.autofilled==='true'){$('videoDuration').value=formatDuration(item.contentDetails?.duration);$('videoDuration').dataset.autofilled='true'}
+      if(sn.description&&(!$('videoDescription').value.trim()||$('videoDescription').dataset.autofilled==='true')){$('videoDescription').value=sn.description;$('videoDescription').dataset.autofilled='true'}
+      $('apiStatus').textContent='영상 정보를 불러왔어! 제목·날짜·길이는 필요하면 직접 수정해도 돼.';
+    }catch(err){$('apiStatus').textContent=`자동 조회에 실패했어: ${err.message} 직접 입력해도 괜찮아.`}
+  }
+  ['videoTitle','videoDate','videoDuration','videoDescription'].forEach(id=>$(id).addEventListener('input',()=>{$(id).dataset.autofilled='false'}));
+  $('videoForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const url=$('videoUrl').value.trim(), ytId=idFromUrl(url);
+    if(!ytId){alert('유튜브 영상 링크를 확인해 줘. 일반 영상 링크, youtu.be, Shorts 링크를 지원해.');return}
+    const id=$('editId').value||('v-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7));
+    const old=videos.find(v=>v.id===id)||{};
+    const v={...old,id,url,title:$('videoTitle').value.trim(),date:$('videoDate').value,duration:$('videoDuration').value.trim(),gameName:$('videoGameName').value.trim(),summary:$('videoGameName').value.trim(),livestreamUrl:$('livestreamUrl').value.trim(),special:$('videoSpecial').value.trim(),description:$('videoDescription').value.trim()};
+    ratingKeys.forEach(k=>v[k]=$(k).value);
+    const idx=videos.findIndex(x=>x.id===id);if(idx>=0)videos[idx]=v;else videos.push(v);
+    persist();resetForm();render();alert('저장했어! 현재 브라우저에 저장된 시제품 데이터야.');
+  });
+  $('adminToggle').addEventListener('click',()=>{$('adminPanel').classList.toggle('show');if($('adminPanel').classList.contains('show'))$('adminPanel').scrollIntoView({behavior:'smooth',block:'start'})});
+  $('resetForm').addEventListener('click',resetForm);
+  $('search').addEventListener('input',render);$('sort').addEventListener('change',render);$('filter').addEventListener('change',render);
+  $('videoGrid').addEventListener('click',e=>{const b=e.target.closest('[data-detail]');if(b)openDetail(b.dataset.detail)});
+  $('adminList').addEventListener('click',e=>{
+    const edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');
+    if(edit){const v=videos.find(x=>x.id===edit.dataset.edit);if(v)fillForm(v)}
+    if(del){const v=videos.find(x=>x.id===del.dataset.delete);if(v&&confirm(`"${v.title}" 영상을 삭제할까?`)){videos=videos.filter(x=>x.id!==v.id);persist();render()}}
+  });
+  $('closeDetail').addEventListener('click',closeDetail);$('detailOverlay').addEventListener('click',e=>{if(e.target===$('detailOverlay'))closeDetail()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+  $('exportData').addEventListener('click',()=>{
+    const blob=new Blob([JSON.stringify(videos,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='jolbo-doksa-video-backup.json';a.click();URL.revokeObjectURL(url);
+  });
+  $('importData').addEventListener('change',async e=>{
+    const file=e.target.files[0];if(!file)return;
+    try{const data=JSON.parse(await file.text());if(!Array.isArray(data))throw new Error();if(!confirm('현재 목록을 백업 파일 내용으로 교체할까?'))return;videos=data.filter(v=>v&&v.id&&v.title&&v.url);persist();render();alert('백업을 가져왔어.')}catch{alert('백업 파일을 읽지 못했어. 올바른 JSON 백업인지 확인해 줘.')}finally{e.target.value=''}
+  });
+  ratingOptions();render();
+})();
+</script>
+</body>
+</html>
